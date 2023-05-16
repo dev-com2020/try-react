@@ -11,14 +11,16 @@ class App extends React.Component {
   constructor(props:any){
     super(props);
     this.state = {
-      enteredName: ""
+      enteredName: "",
+      message: ""
     }
     this.onChangeName = this.onChangeName.bind(this);
   }
   state: {enteredName: string};
   onChangeName(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      enteredName: event.target.value
+      enteredName: event.target.value,
+      message: `Hello from ${event.target.value}`
     });
   }
 
