@@ -21,19 +21,18 @@ class App extends React.Component {
       enteredName: event.target.value
     });
   }
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <Routes>
-          
-  //         <Route path="/" element={<Home/>}></Route>
-  //         <Route path="/another" element={<AnotherScreen/>}></Route>
-  //         <Route path="/greeting" element={<Greeting name="Tomasz"/>}></Route>
-          
-  //       </Routes>
-  //     </header>
-  //   </div>
-  // );
-}
 
+  render() {
+    console.log("App.render");
+    return (
+      <div className="App">
+        <header className="App-header">
+          <input value={this.state.enteredName} onChange={this.onChangeName} />
+          <Greeting name={this.state.enteredName} />
+        </header>
+      </div>
+
+    )
+  }
+}
 export default App;
