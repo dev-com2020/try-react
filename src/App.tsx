@@ -4,7 +4,7 @@ import './App.css';
 import Home from './Home';
 import AnotherScreen from './AnotherScreen';
 import {Routes,Route} from "react-router-dom"
-import Greeting from './Greeting';
+import Greeting from './GreetingFunctional';
 
 
 class App extends React.Component {
@@ -30,7 +30,7 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <input value={this.state.enteredName} onChange={this.onChangeName} />
-          <Greeting name={this.state.enteredName} />
+          <Greeting message={this.state.message} />
         </header>
       </div>
 
