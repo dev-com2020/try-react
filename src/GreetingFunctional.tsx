@@ -8,5 +8,5 @@ export default function Greeting(props: GreetingProps) {
         <div>
             {props.message}
         </div>
-    )
+    );
 }

@@ -1,40 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useReducer} from 'react';
 import './App.css';
-import Home from './Home';
-import AnotherScreen from './AnotherScreen';
-import {Routes,Route} from "react-router-dom"
 import Greeting from './GreetingFunctional';
 
-
-class App extends React.Component {
-  constructor(props:any){
-    super(props);
-    this.state = {
-      enteredName: "",
-      message: ""
+const reducer = (state: any, action: any) => {
+  console.log("reducer");
+  switch (action.type) {
+    case "enteredName":
+      if(state.enteredName === action.payload){
+        return state;
+      }
+      return {...state, enteredName: action.payload}
+    case "message":
+      return {...state, message: `Hello, ${action.payload}`}
+    default:
+      throw new Error("Niepoprawna akcja" + action.type);
     }
-    this.onChangeName = this.onChangeName.bind(this);
-  }
-  state: {enteredName: string};
-  onChangeName(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({
-      enteredName: event.target.value,
-      message: `Hello from ${event.target.value}`
-    });
   }
 
-  render() {
-    console.log("App.render");
+const initialState = {
+  enteredName: "",
+  message: ""
+};
+function App() {
+  const [{message, enteredName}, dispatch] = useReducer(reducer, initialState);
+   
+  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({type: "enteredName", payload: event.target.value});
+    dispatch({type: "message", payload: event.target.value});
+    }
+  
     return (
       <div className="App">
         <header className="App-header">
-          <input value={this.state.enteredName} onChange={this.onChangeName} />
-          <Greeting message={this.state.message} />
+          <input value={enteredName} onChange={onChangeName} />
+          <Greeting message={message} />
         </header>
       </div>
 
     )
   }
-}
 export default App;

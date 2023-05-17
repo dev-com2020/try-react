@@ -1,38 +1,18 @@
-import React from "react";
+import React, { FC, useState, useEffect } from "react";
 
 interface GreetingProps {
-    message: string;
+   name?: string;
 }
-interface GreetingState {
-    message: string
-}
-export default class Greeting extends 
-React.Component<GreetingProps>{
-    constructor(props: GreetingProps) {
-        super(props)
-        this.state = {
-            message: Greeting.getNewMessage(props.name)
+const Greeting: FC<GreetingProps> = ({ name }:GreetingProps) => {
+    const [message,setMessage] = useState("");
+    useEffect(() => {
+        if(name){
+            setMessage(`Hello from ${name}`);
         }
+    }, [name])
+    if(!name){
+        return <div>No name given</div>;
     }
-    state: GreetingState;
-
-    static getDerivedStateFromProps(props: GreetingProps, state: GreetingState) {
-        console.log(props, state);
-        if(props.name && props.name !== state.message) {
-            const newState = {...state};
-            newState.message = Greeting.getNewMessage(props.name);
-        return newState;
-    }
-    return state;
+    return <div>{message}</div>;
 }
-static getNewMessage(name: string = "") {
-    return `Hello ${name}`;
-}
-    render() {
-        console.log("Greeting.render");
-        if(!this.props.name) {
-            return <div>Missing name</div>;
-        }
-        return <div>{this.state.message}</div>;
-    }
-}
+export default Greeting;
